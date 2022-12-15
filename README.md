@@ -18,3 +18,5 @@
 set db name
 
 >`php artisan migrate`
+
+>`php artisan make:resource Product`
