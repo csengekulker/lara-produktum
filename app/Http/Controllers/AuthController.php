@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 use Validator;
 
 class AuthController extends Controller
@@ -24,9 +25,10 @@ class AuthController extends Controller
 
         $input = $request->all();
         $input["password"] = bcrypt( $input[ "password"]);
-        $user = User::create( $input);
+        $user = User::create( $input );
         $success[ "name" ] = $user->name;
 
         // return $this->sendResponse( $success, "Sikeres regisztráció");
+        echo "Sikeres regisztráció";
     }
 }
