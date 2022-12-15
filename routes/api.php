@@ -16,8 +16,10 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(["middleware" => [ "auth:sanctum" ]], function () {
+    Route::post('/newproduct', [ ProductController::class, "store"]);
+    Route::put('/update/{id}', [ ProductController::class, "update"]);
+    Route::delete('/delete/{id}', [ ProductController::class, "destroy"]);
 });
 
 Route::post('/signup', [ AuthController::class, "signUp"]);
@@ -26,7 +28,4 @@ Route::post('/signin', [ AuthController::class, "signIn"]);
 Route::get('/products', [ ProductController::class, "index"]);
 Route::get('product/{id}', [ ProductController::class, "show"]);
 
-Route::post('/newproduct', [ ProductController::class, "store"]);
 
-Route::put('/update/{id}', [ ProductController::class, "update"]);
-Route::delete('/delete/{id}', [ ProductController::class, "destroy"]);

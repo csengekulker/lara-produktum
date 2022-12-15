@@ -61,7 +61,7 @@ class ProductController extends BaseController
         }
 
         $product = Product::find( $id );
-        $product->update ( $input );
+        $product->update( $input );
 
         return $this->sendResponse( new ProductResource( $product), "Termékadatok frissítve");
     }
