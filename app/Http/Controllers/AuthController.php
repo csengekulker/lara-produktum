@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\BaseController as BaseController;
 use App\Models\User;
 use Validator;
-use Auth;
 
-class AuthController extends Controller
-
+class AuthController extends BaseController
 
 {
     public function signUp( Request $request) {
@@ -21,9 +21,8 @@ class AuthController extends Controller
         ]);
 
         if($validator->fails()) {
-
-            // return sendError( "Error validation", $validator->errors());
-            echo "Sikertelen regisztráció";
+            echo "err";
+            return sendError( "Error validation", $validator->errors());
         }
 
         $input = $request->all();
@@ -31,8 +30,7 @@ class AuthController extends Controller
         $user = User::create( $input );
         $success[ "name" ] = $user->name;
 
-        // return $this->sendResponse( $success, "Sikeres regisztráció");
-        echo "Sikeres regisztráció";
+        return $this->sendResponse( $success, "Sikeres regisztráció");
     }
 
     public function signIn(Request $request ) {
@@ -41,14 +39,14 @@ class AuthController extends Controller
             "password" => $request->password
         ])) {
             $authUser = Auth::user();
-            $success[ "token "] = $authUser->createToken( "MyAuthApp" )->plainTextToken;
+            $success[ "token"] = $authUser->createToken( "MyAuthApp" )->plainTextToken;
             $success[ "name" ] = $authUser->name;
 
-            // return $this->sendResponse( $success, "Sikeres bejelentkezés");
-            echo "sikeres bejelentkezés";
+            return $this->sendResponse( $success, "Sikeres bejelentkezés" );
+
         } else {
-            // return $this->sendError( "Unauthorized", [ "error" => "Hibás adatok"]);
-            echo "sikertelen bejelentkezés";
+            echo "err";
+            return $this->sendError( "Unauthorized", [ "error" => "Hibás adatok"], 401);
         }
     }
 }
