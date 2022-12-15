@@ -21,7 +21,6 @@ class AuthController extends BaseController
         ]);
 
         if($validator->fails()) {
-            echo "err";
             return sendError( "Error validation", $validator->errors());
         }
 
@@ -45,7 +44,6 @@ class AuthController extends BaseController
             return $this->sendResponse( $success, "Sikeres bejelentkezés" );
 
         } else {
-            echo "err";
             return $this->sendError( "Unauthorized", [ "error" => "Hibás adatok"], 401);
         }
     }
