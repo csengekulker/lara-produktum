@@ -21,10 +21,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/signup', [ AuthController::class, "signUp"]);
-
 Route::post('/signin', [ AuthController::class, "signIn"]);
 
 Route::get('/products', [ ProductController::class, "index"]);
 Route::get('product/{id}', [ ProductController::class, "show"]);
 
 Route::post('/newproduct', [ ProductController::class, "store"]);
+
+Route::put('/update/{id}', [ ProductController::class, "update"]);

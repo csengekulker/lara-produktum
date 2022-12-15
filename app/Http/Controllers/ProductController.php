@@ -45,4 +45,24 @@ class ProductController extends BaseController
         
         return $this->sendResponse( new ProductResource( $product ), "Termék betöltve");
     }
+
+    public function update (Request $request, $id ) {
+
+        $input = $request->all();
+
+        $validator = Validator::make( $input, [
+
+            "name" => "required",
+            "price" => "required"
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError( $validator->errors());
+        }
+
+        $product = Product::find( $id );
+        $product->update ( $input );
+
+        return $this->sendResponse( new ProductResource( $product), "Termékadatok frissítve");
+    }
 }
