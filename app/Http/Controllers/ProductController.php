@@ -65,4 +65,12 @@ class ProductController extends BaseController
 
         return $this->sendResponse( new ProductResource( $product), "Termékadatok frissítve");
     }
+
+    public function destroy( $id ) {
+
+        Product::destroy( $id );
+
+        return $this->sendResponse([], "Termék törölve");
+        
+    }
 }
