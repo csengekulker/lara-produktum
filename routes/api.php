@@ -25,5 +25,6 @@ Route::post('/signup', [ AuthController::class, "signUp"]);
 Route::post('/signin', [ AuthController::class, "signIn"]);
 
 Route::get('/products', [ ProductController::class, "index"]);
+Route::get('product/{id}', [ ProductController::class, "show"]);
 
 Route::post('/newproduct', [ ProductController::class, "store"]);

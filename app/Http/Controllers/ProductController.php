@@ -35,4 +35,14 @@ class ProductController extends BaseController
         return $this->sendResponse( new ProductResource( $product ), "Termék felvéve");
 
     }
+
+    public function show( $id ) {
+        $product = Product::find( $id );
+
+        if ( is_null( $product )) {
+            return $this->sendError( "A termék nem létezik");
+        } 
+        
+        return $this->sendResponse( new ProductResource( $product ), "Termék betöltve");
+    }
 }
